@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "lib": ["es2021", "dom"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2021",
+    "outDir": "dist.test",
+    "sourceMap": true,
+    "declaration": true,
+    "noImplicitAny": false,
+    "experimentalDecorators": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "test/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    ".git"
+  ]
+}
