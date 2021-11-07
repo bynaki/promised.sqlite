@@ -1,5 +1,5 @@
 import {
-  Database,
+  Database as DB,
   OPEN_READONLY,
   OPEN_READWRITE,
   OPEN_CREATE,
@@ -24,26 +24,26 @@ export interface RunResult {
 }
 
 
-export function open(filename: string): Promise<PromisedSqlite>
-export function open(filename: string, mode: number): Promise<PromisedSqlite>
-export function open(filename: string, mode?: number): Promise<PromisedSqlite> {
-  const promised: Promise<PromisedSqlite> = (mode === undefined)
+export function open(filename: string): Promise<Database>
+export function open(filename: string, mode: number): Promise<Database>
+export function open(filename: string, mode?: number): Promise<Database> {
+  const promised: Promise<Database> = (mode === undefined)
   ? new Promise((resolve, reject) => {
-    const db = new Database(filename, err => {
+    const db = new DB(filename, err => {
       if(err) {
         reject(err)
         return
       }
-      resolve(new PromisedSqlite(db))
+      resolve(new Database(db))
     })
   })
   : new Promise((resolve, reject) => {
-    const db = new Database(filename, mode, err => {
+    const db = new DB(filename, mode, err => {
       if(err) {
         reject(err)
         return
       }
-      resolve(new PromisedSqlite(db))
+      resolve(new Database(db))
     })
   })
   return promised
@@ -51,8 +51,8 @@ export function open(filename: string, mode?: number): Promise<PromisedSqlite> {
 
 
 
-export class PromisedSqlite {
-  constructor(protected readonly db: Database) {}
+export class Database {
+  constructor(protected readonly db: DB) {}
 
   close(): Promise<void> {
     return new Promise((resolve, reject) => {

@@ -1,6 +1,6 @@
 {
   "name": "promised.sqlite",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "You can use async/await for sqlite3",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
